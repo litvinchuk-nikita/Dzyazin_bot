@@ -172,13 +172,13 @@ async def process_confirmation_press(callback: CallbackQuery):
         f'tg: @{callback.from_user.username}'}
     response = requests.get(
         'https://api.telegram.org/bot' + config.tg_bot.token + '/sendMessage', params=params)
-    # params: dict[str, str] = {
-    #     'chat_id': f'{config.tg_bot.admin_ids[0]}',
-    #     'text': f'{callback.from_user.full_name} забронировал(а) '
-    #     f'занятие по фридайвингу - {date} в {time}.\n'
-    #     f'tg: {callback.from_user.url}'}
-    # response = requests.get(
-    #     'https://api.telegram.org/bot' + config.tg_bot.token + '/sendMessage', params=params)
+    params: dict[str, str] = {
+        'chat_id': f'{config.tg_bot.admin_ids[0]}',
+        'text': f'{callback.from_user.full_name} забронировал(а) '
+        f'занятие по фридайвингу - {date} в {time}.\n'
+        f'tg: {callback.from_user.url}'}
+    response = requests.get(
+        'https://api.telegram.org/bot' + config.tg_bot.token + '/sendMessage', params=params)
     await callback.message.answer(
         text='Удобно ли вам будет оплатить занятие через нашего бота ?',
         reply_markup=create_pay_kb())
